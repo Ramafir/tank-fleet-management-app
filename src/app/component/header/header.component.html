@@ -1,0 +1,35 @@
+<div [hidden]="!isLoggedIn()" class="navbar navbar-expand-md navbar-dark bg-dark mb-4" role="navigation" id="user-container">
+  <a class="navbar-brand" href="/">Tank Fleet Manager</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a  class="nav-link" routerLink="/tanks">Tanks <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a  class="nav-link" routerLink="/users">Presidents <span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </div>
+  <div [hidden]="isLoggedIn()" class="text-end">
+    <a class routerLink="/login"><button type="button" class="btn btn-outline-light me-2">Sign in</button></a>
+    <a class routerLink="/register"><button type="button" class="btn btn-outline-light me-2">Register Account</button></a>
+  </div>
+</div>
+
+<div class="page-container">
+
+  <!-- HEADER DESKTOP-->
+  <header class="header-desktop">
+    <div class="section-content section-content-p30">
+      <div class="container-fluid">
+        <div class="header-wrap">
+
+        </div>
+        <div class="account-wrap"></div>
+      </div>
+    </div>
+  </header>
+</div>
