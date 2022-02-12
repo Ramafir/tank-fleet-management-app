@@ -91,7 +91,7 @@ export class TankComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.tankService.deleteTank(id).subscribe(
         (response: CustomHttpResponse) => {
-          this.notifier.notify(NotificationType.SUCCESS, 'PROJECT DELETED')
+          this.notifier.notify(NotificationType.SUCCESS, 'Tank deleted')
           this.getUserTanks(false);
         },
         (errorResponse: HttpErrorResponse) => {
