@@ -258,7 +258,7 @@
               <span class="help-block" *ngIf="mileageEditInput.invalid && mileageEditInput.touched" style="color:red;">Cannot be a negative number</span>
               <div class="form-group">
                 <label>Country entry date</label>
-                <input id="editdatefield" type="date" name="countryEntryDate" min="1970-01-01" max="2022-02-11" required ngModel="{{editTank?.countryEntryDate}}" class="form-control" #entryEditInput="ngModel">
+                <input  type="date" name="countryEntryDate" min="1970-01-01" max="2022-02-14" required ngModel="{{editTank?.countryEntryDate}}" class="form-control" #entryEditInput="ngModel">
               </div>
               <span class="help-block" *ngIf="entryEditInput.invalid && entryEditInput.touched" style="color:red;">Must be between year 1970 and current</span>
               <div class="form-group">
