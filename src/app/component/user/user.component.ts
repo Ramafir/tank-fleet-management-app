@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject, Subscription} from "rxjs";
 import {User} from "../../model/user";
-import {FileUploadStatus} from "../../model/file-upload-status";
 import {UserService} from "../../service/user.service";
 import {NotificationService} from "../../service/notification.service";
 import {AuthenticationService} from "../../service/authentication.service";
@@ -74,7 +73,6 @@ export class UserComponent implements OnInit, OnDestroy {
   public searchUsers(searchTerm: string): void {
     const results: User[] = [];
     for (const user of this.userService.getUsersFromLocalCache()) {
-
       if (user.fullName.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
         user.username.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
         user.userId.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
@@ -125,24 +123,6 @@ export class UserComponent implements OnInit, OnDestroy {
           this.sendNotification(NotificationType.ERROR, errorResponse.message);
           this.profileImage = null;
         }
-      )
-    );
-  }
-
-  public onResetPassword(emailForm: NgForm): void {
-    this.refreshing = true;
-    const emailAddress = emailForm.value['reset-password-email']
-    this.subscriptions.push(
-      this.userService.resetPassword(emailAddress).subscribe(
-        (response: CustomHttpResponse) => {
-          this.sendNotification(NotificationType.SUCCESS, response.message);
-          this.refreshing = false;
-        },
-        (errorResponse: HttpErrorResponse) => {
-          this.sendNotification(NotificationType.ERROR, errorResponse.message);
-          this.refreshing = false;
-        },
-        () => emailForm.reset()
       )
     );
   }

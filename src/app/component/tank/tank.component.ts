@@ -6,7 +6,6 @@ import { UserService } from 'src/app/service/user.service';
 import {NotificationService} from "../../service/notification.service";
 import {NotificationType} from "../../enum/notification-type.enum";
 import {BehaviorSubject, Subscription} from "rxjs";
-import {FileUploadStatus} from "../../model/file-upload-status";
 import {HttpErrorResponse} from "@angular/common/http";
 import {TankService} from "../../service/tank.service";
 import {Tank} from "../../model/tank";
