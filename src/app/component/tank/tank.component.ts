@@ -27,8 +27,6 @@ export class TankComponent implements OnInit, OnDestroy {
   public users: User[];
   public refreshing: boolean;
   public selectedTank: Tank;
-  public minPattern = Date.UTC(1970, 1, 1, 1 , 1, 1, 1)
-  public maxPattern = Date.now();
   public profileImage: File;
   public editTank: Tank;
   public user: User;

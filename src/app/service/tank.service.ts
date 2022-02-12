@@ -50,12 +50,10 @@ export class TankService {
       .pipe(
         catchError(this.handleError)
       );
-
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     console.log(error);
     return throwError(`An error occurred - Error code: ${error.status}`);
   }
-
 }
