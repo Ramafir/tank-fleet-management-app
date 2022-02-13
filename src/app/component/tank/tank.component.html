@@ -100,7 +100,7 @@
                       <h6 class="pt-sm-2 pb-1 mb-0 text-nowrap">Producer: {{selectedTank?.producer}}</h6>
                       <h6 class="pt-sm-2 pb-1 mb-0 text-nowrap">Model: {{selectedTank?.model}}</h6>
                       <p class="mb-1">Current modification: {{selectedTank?.currentModification}}</p>
-                      <p class="mb-1">Year: {{selectedTank?.yearOfProduction}}</p>
+                      <p class="mb-1">Year of production: {{selectedTank?.yearOfProduction}}</p>
                     </div>
                     <div class="text-center text-sm-right">
                       <div class="text-muted"><small>Created {{selectedTank?.creationDate | date: 'mediumDate'}}</small>
@@ -110,6 +110,7 @@
                 </div>
               </div>
               <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i class="fa fa-calendar float-right"></i>Country entry date: {{selectedTank?.countryEntryDate | date: 'mediumDate'}}</li>
                 <li class="list-group-item"><i class="fa fa-road float-right"></i>Mileage: {{selectedTank?.mileage}}</li>
                 <li class="list-group-item"><i class="fa fa-hashtag float-right"></i>Side number: {{selectedTank?.sideNumber}}</li>
                 <li class="list-group-item"><i class="fa fa-crosshairs float-right"></i>Ammo: {{selectedTank?.ammunition}}</li>
@@ -169,7 +170,7 @@
               <span class="help-block" *ngIf="mileageInput.invalid && mileageInput.touched" style="color:red;">Cannot be a negative number</span>
               <div class="form-group">
                 <label>Country entry date</label>
-                <input id="datefield" type='date' min='1970-01-01' max="2022-02-14" required ngModel class="form-control" #entryInput="ngModel">
+                <input id="entryDate" type='date' min='1970-01-01' max='2022-02-14' required ngModel class="form-control" #entryInput="ngModel">
               </div>
               <span class="help-block" *ngIf="entryInput.invalid && entryInput.touched" style="color:red;">Must be between year 1970 and current</span>
               <div class="form-group">
@@ -229,6 +230,7 @@
                 <label>Producer</label>
                 <input [disabled]="!isPresident" type="text" name="producer" required ngModel="{{editTank?.producer}}" class="form-control">
                 <input type="hidden" ngModel="{{editTank?.id}}" name="id" class="form-control" id="id">
+                <input type="hidden" ngModel="{{editTank?.countryEntryDate}}" name="countryEntryDate" class="form-control">
                 <input type="hidden" name="user" required [(ngModel)]="user" class="form-control">
               </div>
               <div class="form-group">
@@ -256,11 +258,6 @@
                 <input type="number" name="mileage" required [minlength]="0" ngModel="{{editTank?.mileage}}" class="form-control" #mileageEditInput="ngModel">
               </div>
               <span class="help-block" *ngIf="mileageEditInput.invalid && mileageEditInput.touched" style="color:red;">Cannot be a negative number</span>
-              <div class="form-group">
-                <label>Country entry date</label>
-                <input  type="date" name="countryEntryDate" min="1970-01-01" max="2022-02-14" required ngModel="{{editTank?.countryEntryDate}}" class="form-control" #entryEditInput="ngModel">
-              </div>
-              <span class="help-block" *ngIf="entryEditInput.invalid && entryEditInput.touched" style="color:red;">Must be between year 1970 and current</span>
               <div class="form-group">
                 <label>Ammunition</label>
                 <input [disabled]="!isPresident" type="number" name="ammunition" [minlength]="0" required ngModel="{{editTank?.ammunition}}" class="form-control" #ammunitionEditInput="ngModel">
