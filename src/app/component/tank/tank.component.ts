@@ -30,6 +30,7 @@ export class TankComponent implements OnInit, OnDestroy {
   public editTank: Tank;
   public user: User;
   public tanks: Tank[];
+  date: any;
 
   constructor(private router: Router, private authenticationService: AuthenticationService, private userService: UserService, private notifier: NotificationService, private tankService: TankService) {
   }
@@ -37,6 +38,7 @@ export class TankComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.user=this.authenticationService.getUserFromLocalCache();
     this.getUserTanks(true)
+    this.date = new Date().toISOString().slice(0, 10);
   }
 
   public changeTitle(title: string): void {

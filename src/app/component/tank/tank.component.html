@@ -170,7 +170,7 @@
               <span class="help-block" *ngIf="mileageInput.invalid && mileageInput.touched" style="color:red;">Cannot be a negative number</span>
               <div class="form-group">
                 <label>Country entry date</label>
-                <input  type="date" name="countryEntryDate" min='1970-01-01' max='2022-02-14' required ngModel class="form-control" #entryInput="ngModel">
+                <input  type="date" name="countryEntryDate" min='1970-01-01' max="{{this.date}}" required ngModel class="form-control" #entryInput="ngModel">
               </div>
               <span class="help-block" *ngIf="entryInput.invalid && entryInput.touched" style="color:red;">Must be between year 1970 and current</span>
               <div class="form-group">
@@ -265,17 +265,17 @@
               <span class="help-block" *ngIf="ammunitionEditInput.invalid && ammunitionEditInput.touched" style="color:red;">Cannot be a negative number</span>
               <div class="form-group">
                 <label>Front armor</label>
-                <input [disabled]="!isPresident" type="number" name="frontArmor" [minlength]="1" required ngModel="{{editTank?.frontArmor}}" class="form-control" #frontArmorEditInput="ngModel">
+                <input [disabled]="!isPresident" type="number" name="frontArmor" [minlength]="0" required ngModel="{{editTank?.frontArmor}}" class="form-control" #frontArmorEditInput="ngModel">
               </div>
               <span class="help-block" *ngIf="frontArmorEditInput.invalid && frontArmorEditInput.touched" style="color:red;">Cannot be a negative number</span>
               <div class="form-group">
                 <label>Side armor</label>
-                <input [disabled]="!isPresident" type="number" name="sideArmor" [minlength]="1" required ngModel="{{editTank?.sideArmor}}" class="form-control" #sideArmorEditInput="ngModel">
+                <input [disabled]="!isPresident" type="number" name="sideArmor" [minlength]="0" required ngModel="{{editTank?.sideArmor}}" class="form-control" #sideArmorEditInput="ngModel">
               </div>
               <span class="help-block" *ngIf="sideArmorEditInput.invalid && sideArmorEditInput.touched" style="color:red;">Cannot be a negative number</span>
               <div class="form-group">
                 <label>Back armor</label>
-                <input [disabled]="!isPresident" type="number" name="backArmor" [minlength]="1" required ngModel="{{editTank?.backArmor}}" class="form-control" #backArmorEditInput="ngModel">
+                <input [disabled]="!isPresident" type="number" name="backArmor" [minlength]="0" required ngModel="{{editTank?.backArmor}}" class="form-control" #backArmorEditInput="ngModel">
               </div>
               <span class="help-block" *ngIf="backArmorEditInput.invalid && backArmorEditInput.touched" style="color:red;">Cannot be a negative number</span>
             </form>
