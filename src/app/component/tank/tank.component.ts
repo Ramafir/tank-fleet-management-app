@@ -12,6 +12,7 @@ import {Tank} from "../../model/tank";
 import {Role} from "../../enum/role.enum";
 import {NgForm} from "@angular/forms";
 import {CustomHttpResponse} from "../../model/custom-http-response";
+import {error} from "@angular/compiler/src/util";
 
 @Component({
   selector: 'app-tank',
@@ -31,6 +32,7 @@ export class TankComponent implements OnInit, OnDestroy {
   public user: User;
   public tanks: Tank[];
   date: any;
+  currentYear = 2022;
 
   constructor(private router: Router, private authenticationService: AuthenticationService, private userService: UserService, private notifier: NotificationService, private tankService: TankService) {
   }
@@ -58,14 +60,14 @@ export class TankComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.tankService.saveTank(tankForm.value).subscribe(
         (response: Tank) => {
-          this.clickButton('new-tank-close');
-          this.getUserTanks(false);
-          tankForm.reset();
-          this.sendNotification(NotificationType.SUCCESS, `${response.model} added successfully.`);
+            this.clickButton('new-tank-close');
+            this.getUserTanks(false);
+            tankForm.reset();
+            this.sendNotification(NotificationType.SUCCESS, `${response.model} added successfully.`);
+            this.reloadComponent();
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, errorResponse.message);
-          this.profileImage = null;
         }
       )
     );
@@ -77,15 +79,17 @@ export class TankComponent implements OnInit, OnDestroy {
   }
 
   public onUpdateTank(tank: Tank): void {
-    this.tankService.updateTank(tank).subscribe(
-      (response: Tank) => {
-        this.getUserTanks(true);
-        this.notifier.notify(NotificationType.SUCCESS, `Updated tank ${response.producer} ${response.model}`)
-      },
-      (errorResponse: HttpErrorResponse) => {
-        this.sendNotification(NotificationType.ERROR, errorResponse.message);
-        alert(errorResponse.message);
-      }
+    this.subscriptions.push(
+      this.tankService.updateTank(tank).subscribe(
+        (response: Tank) => {
+          this.getUserTanks(false);
+          this.notifier.notify(NotificationType.SUCCESS, `Updated tank ${response.producer} ${response.model}`)
+        },
+        (errorResponse: HttpErrorResponse) => {
+          this.sendNotification(NotificationType.ERROR, errorResponse.message);
+          alert(errorResponse.message);
+        }
+      )
     );
   }
 
@@ -98,7 +102,6 @@ export class TankComponent implements OnInit, OnDestroy {
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, errorResponse.message);
-          this.profileImage = null;
         }
       )
     );
@@ -161,5 +164,12 @@ export class TankComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  reloadComponent() {
+    let currentUrl = this.router.url;
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate([currentUrl]);
   }
 }

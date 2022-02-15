@@ -94,19 +94,16 @@ export class UserComponent implements OnInit, OnDestroy {
 
   public onUpdateUser(): void {
     const formData = this.userService.createUserFormData(this.currentUsername, this.editUser);
-
     this.subscriptions.push(
       this.userService.updateUser(formData).subscribe(
         (response: User) => {
           this.clickButton('closeEditUserModalButton');
           this.getUsers(false);
-          this.fileName = null;
           this.sendNotification(NotificationType.SUCCESS, `${response.fullName} updated successfully.`);
 
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, errorResponse.message);
-          this.profileImage = null;
         }
       )
     );
@@ -121,7 +118,6 @@ export class UserComponent implements OnInit, OnDestroy {
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, errorResponse.message);
-          this.profileImage = null;
         }
       )
     );
@@ -137,14 +133,11 @@ export class UserComponent implements OnInit, OnDestroy {
         (response: User) => {
           this.authenticationService.addUserToLocalCache(response);
           this.getUsers(false);
-          this.fileName = null;
           this.sendNotification(NotificationType.SUCCESS, `${response.fullName} updated successfully.`);
           this.refreshing=false;
-
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, errorResponse.message);
-          this.profileImage = null;
           this.refreshing=false;
         }
       )
